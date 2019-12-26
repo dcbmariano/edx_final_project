@@ -64,47 +64,6 @@ confusionMatrix(data=factor(y_hat), reference=factor(y))
 
 # everything appear ok... I obtained the expected results... 
 
-# # !!!!!!!!!!!!!!!! EXPERIMENTAL code !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-# #  roc curve  ---------------------------------
-# 
-# p <- 0.5
-# n <- length(y)
-# y_hat <- sample(c("t", "nt"), n, replace = TRUE, prob=c(p, 1-p)) %>% 
-#   factor(levels = levels(y))
-# mean(y_hat == y)
-# 
-# # ROC curve
-# probs <- seq(0, 1, length.out = 10)
-# guessing <- map_df(probs, function(p){
-#   y_hat <- 
-#     sample(c("t", "nt"), n, replace = TRUE, prob=c(p, 1-p)) %>% 
-#     factor(levels = c("t", "nt"))
-#   list(method = "Guessing",
-#        FPR = 1 - specificity(factor(y_hat), factor(y)),
-#        TPR = sensitivity(factor(y_hat), factor(y)))
-# })
-# guessing %>% qplot(FPR, TPR, data =., xlab = "1 - Specificity", ylab = "Sensitivity")
-# 
-# 
-# cutoffs <- c(50, seq(60, 75), 80)
-# height_cutoff <- map_df(cutoffs, function(x){
-#   y_hat <- ifelse(y > x, "t", "nt") %>% 
-#     factor(levels = c("t", "nt"))
-#   list(method = "Height cutoff",
-#        FPR = 1-specificity(factor(y_hat), factor(y)),
-#        TPR = sensitivity(factor(y_hat), factor(y)))
-# })
-# 
-# # plot both curves together
-# bind_rows(guessing, height_cutoff) %>%
-#   ggplot(aes(FPR, TPR, color = method)) +
-#   geom_line() +
-#   geom_point() +
-#   xlab("1 - Specificity") +
-#   ylab("Sensitivity")
-# 
-# # !!!!!!!!!!!!!!!! FIM CÓDIGO EXPERIMENTAL !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
 
 # ------------------------ the magic starts here ------------------------------------
 
